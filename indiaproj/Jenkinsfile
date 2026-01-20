@@ -14,7 +14,7 @@ pipeline {
     stage('Test Code') {
       steps {
         echo 'JUNIT Test case execution started'
-        bat 'mvn clean test'
+        bat 'cd indiaproj && mvn clean test'
         
       }
       post {
@@ -28,13 +28,13 @@ pipeline {
     stage('Build Project') {
       steps {
         echo 'Building Java project'
-        bat 'mvn clean package -DskipTests'
+        bat 'cd indiaproj && mvn clean package -DskipTests'
       }
     }
     stage('Build the Docker Image') {
       steps {
         echo 'Building Docker Image'
-        bat 'docker build -t myindiaproj:1.0 .'
+        bat 'cd indiaproj && docker build -t myindiaproj:1.0 .'
       }
     }
     stage('Push Docker Image to DockerHub') {
